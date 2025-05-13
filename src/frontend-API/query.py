@@ -14,7 +14,7 @@ def montar_query(filtros):
     elif ano == "todos" and mes == "todos":
         agrupamento = "ano" 
     elif ano != "todos" and mes != "todos":
-        agrupamento = None  
+        agrupamento = "mes"  
     else:
         agrupamento = None
 

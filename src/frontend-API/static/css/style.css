@@ -573,6 +573,12 @@ input[type="text"] {
   border-radius: 10px;
 }
 
+#funnel-chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
 .funnel-title {
   color: #fff;
   text-align: center;

@@ -9,7 +9,7 @@ def get_db_connection():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='1234',
+        password='Feluvi0511',
         database='api',
         cursorclass=pymysql.cursors.DictCursor 
     )
@@ -32,6 +32,7 @@ def website():
 @app.route('/filtros', methods=['POST'])
 def filtros_dados():
     filtros = request.get_json()
+    print("Filtros recebidos:", filtros)
 
     try:
         query, params = montar_query(filtros)
