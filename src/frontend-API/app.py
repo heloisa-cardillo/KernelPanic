@@ -14,7 +14,7 @@ def get_db_connection():
         database='api',
         cursorclass=pymysql.cursors.DictCursor 
     )
-    print("COnexao feita!")
+    print("Conexão feita!")
     return conn
 
 @app.route("/")
