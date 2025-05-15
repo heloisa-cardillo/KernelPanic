@@ -122,10 +122,6 @@ def filtros_dados_funil():
 
     resposta = []
     for row in resultados:
-        total_valor_fob = row.get("total_valor_fob", 0)
-        total_kg_liquido = row.get("total_kg_liquido", 0)
-        valor_agregado = round(float(total_valor_fob) / float(total_kg_liquido), 2) if total_kg_liquido else 0
-
         resposta.append({
             "tipo": filtros.get("tipo"),
             "ano": row.get("ano"),
@@ -133,9 +129,9 @@ def filtros_dados_funil():
             "municipio": filtros.get("municipio"),
             "pais": filtros.get("pais"),
             "ncm": filtros.get("ncm"),
-            "total_valor_agregado": valor_agregado,
-            "total_valor_fob": total_valor_fob,
-            "total_kg_liquido": total_kg_liquido,
+            "total_valor_agregado": row.get("total_valor_agregado", 0),
+            "total_valor_fob": row.get("total_valor_fob", 0),
+            "total_kg_liquido": row.get("total_kg_liquido", 0),
             "total_registros": row.get("total_registros", 0)
         })
 
