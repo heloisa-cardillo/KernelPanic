@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx = canvas.getContext('2d');
   
     const data = {
-      labels: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+      labels: ['2013', '2014', '2015', '2016', '2017'],
       datasets: [{
         label: 'Exportações (em milhões USD)',
-        data: [500, 520, 480, 510, 530, 600, 590, 560, 620, 650, 700],
+        data: [500, 520, 480, 510, 530],
         backgroundColor: [
           '#021A38',
           '#03234D',
@@ -15,10 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
           '#164882',
           '#2A5991',
           '#3F6AA1',
-          '#547BB0',
-          '#6A8CC0',
-          '#7F9DCF',
-          '#94AEDD'
         ],
         borderWidth: 0
       }]
