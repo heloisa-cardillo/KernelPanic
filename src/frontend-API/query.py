@@ -69,3 +69,54 @@ def montar_query(filtros):
         sql += " GROUP BY t.co_mes ORDER BY t.co_mes"
 
     return sql, valores
+
+def montar_query_top5(filtros):
+    if filtros.get("tipo") == "importacao":
+        tabela = "importacao"
+    elif filtros.get("tipo") == "exportacao":
+        tabela = "exportacao"
+    else:
+        raise ValueError("Informe se é 'importação' ou 'exportação' no campo 'tipo'.")
+
+    sql = f"""
+        SELECT 
+            t.co_sh4 AS codigo_ncm,
+            sh.no_sh4_por AS nome_produto,
+            SUM(t.valor_agregado) AS valor_agregado
+        FROM {tabela} t
+        JOIN sh ON sh.co_sh4 = t.co_sh4
+        JOIN municipios m ON m.co_mun = t.co_mun
+        JOIN pais p ON p.co_pais = t.co_pais
+    """
+
+    condicoes = []
+    valores = []
+
+    if filtros.get("ano") and filtros["ano"] != "todos":
+        condicoes.append("t.co_ano = %s")
+        valores.append(filtros["ano"])
+
+    if filtros.get("mes") and filtros["mes"] != "todos":
+        condicoes.append("t.co_mes = %s")
+        valores.append(filtros["mes"])
+
+    if filtros.get("municipio") and filtros["municipio"] != "todos":
+        condicoes.append("m.co_mun = %s")
+        valores.append(filtros["municipio"])
+
+    if filtros.get("pais") and filtros["pais"] != "todos":
+        condicoes.append("(p.co_pais = %s OR p.co_pais_isoa3 = %s OR p.no_pais = %s)")
+        valores.extend([filtros["pais"]] * 3)
+
+    if condicoes:
+        sql += " WHERE " + " AND ".join(condicoes)
+
+    sql += """
+        GROUP BY t.co_sh4, sh.no_sh4_por
+        ORDER BY valor_agregado DESC
+        LIMIT 5
+    """
+
+    return sql, valores
+
+

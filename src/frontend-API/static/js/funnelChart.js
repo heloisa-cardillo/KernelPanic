@@ -4,82 +4,104 @@
   let dataSalva;
   let labels;
   const mesesNomes = [
-    "", 
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    "",
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro",
   ];
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('funnelChart');
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("funnelChart");
     if (!canvas) {
       console.error('Canvas com id "funnelChart" não encontrado.');
       return;
     }
-    
-    const ctx = canvas.getContext('2d');
+
+    const ctx = canvas.getContext("2d");
     chartFunnel = new Chart(ctx, {
-      type: 'bar',
+      type: "bar",
       data: {
         labels: [],
-        datasets: [{
-          label: 'Valor Agregado',
-          data: [],
-          backgroundColor: ['#043873', '#054285', '#065097', '#0760A9', '#0870BB'],
-          borderColor: '#043873'
-        }]
+        datasets: [
+          {
+            label: "Valor Agregado",
+            data: [],
+            backgroundColor: [
+              "#043873",
+              "#054285",
+              "#065097",
+              "#0760A9",
+              "#0870BB",
+            ],
+            borderColor: "#043873",
+          },
+        ],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
           x: {
-            title: { display: true, text: 'Período', color: '#043873' },
-            ticks: { color: '#043873' }
+            title: { display: true, text: "Período", color: "#043873" },
+            ticks: { color: "#043873" },
           },
           y: {
             beginAtZero: true,
-            title: { display: true, text: 'Total de Registros', color: '#043873' },
-            ticks: { color: '#043873' }
-          }
+            title: {
+              display: true,
+              text: "Total de Registros",
+              color: "#043873",
+            },
+            ticks: { color: "#043873" },
+          },
         },
-        plugins: { legend: { display: false } }
-      }
+        plugins: { legend: { display: false } },
+      },
     });
 
-    const button = document.getElementById('buttonSubmitFunnel');
+    const button = document.getElementById("buttonSubmitFunnel");
     if (button) {
-      button.addEventListener('click', function (event) {
+      button.addEventListener("click", function (event) {
         event.preventDefault();
-        document.getElementById('loading').style.display = 'flex';
+        document.getElementById("loading").style.display = "flex";
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 120000);
+        const timeoutId = setTimeout(() => controller.abort(), 180000);
         const formData = {
-          tipo: document.getElementById('funnel-tipo').value,
-          ano: document.getElementById('funnel-ano').value,
-          mes: document.getElementById('funnel-mes').value,
-          pais: document.getElementById('funnel-pais').value,
-          municipio: document.getElementById('funnel-municipio').value,
-          ncm: document.getElementById('funnel-ncm').value
+          tipo: document.getElementById("funnel-tipo").value,
+          ano: document.getElementById("funnel-ano").value,
+          mes: document.getElementById("funnel-mes").value,
+          pais: document.getElementById("funnel-pais").value,
+          municipio: document.getElementById("funnel-municipio").value,
+          ncm: document.getElementById("funnel-ncm").value,
         };
 
-        fetch('http://127.0.0.1:5000/filtros', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        fetch("http://127.0.0.1:5000/filtros_funil", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-          signal: controller.signal
+          signal: controller.signal,
         })
-          .then(response => response.json())
-          .then(receivedData => {
-            console.log('Dados recebidos:', receivedData);
+          .then((response) => response.json())
+          .then((receivedData) => {
+            console.log("Dados recebidos:", receivedData);
             if (Array.isArray(receivedData)) {
               dataSalva = receivedData;
-            } else if (receivedData && typeof receivedData === 'object') {
+            } else if (receivedData && typeof receivedData === "object") {
               dataSalva = [receivedData];
             } else {
               console.error("Formato dos dados inesperado:", receivedData);
               return;
             }
-            labels = dataSalva.map(d => {
+            labels = dataSalva.map((d) => {
               if (d.mes && d.mes !== "todos") {
                 return mesesNomes[Number(d.mes)] || d.mes;
               }
@@ -87,11 +109,11 @@
             });
             atualizarGrafico();
           })
-          .catch(error => {
-            console.error('Erro ao enviar os dados:', error);
+          .catch((error) => {
+            console.error("Erro ao enviar os dados:", error);
           })
           .finally(() => {
-            document.getElementById('loading').style.display = 'none';
+            document.getElementById("loading").style.display = "none";
             clearTimeout(timeoutId);
           });
       });
@@ -103,11 +125,16 @@
       console.error("Dados inválidos para atualizar o gráfico:", dataSalva);
       return;
     }
-    valores = dataSalva.map(d => d.total_valor_agregado);
-    chartFunnel.data.datasets[0].label = 'Valor agregado';
+    valores = dataSalva.map((d) => d.total_valor_agregado);
+    chartFunnel.data.datasets[0].label = "Valor agregado";
     chartFunnel.data.labels = labels;
     chartFunnel.data.datasets[0].data = valores;
     chartFunnel.update();
-    console.log("Gráfico atualizado com labels:", labels, "e valores:", valores);
+    console.log(
+      "Gráfico atualizado com labels:",
+      labels,
+      "e valores:",
+      valores
+    );
   }
 })();
