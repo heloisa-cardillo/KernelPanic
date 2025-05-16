@@ -1,58 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('funnelChart')
-    ctx = canvas.getContext('2d');
-  
-    const data = {
-      labels: ['2013', '2014', '2015', '2016', '2017'],
-      datasets: [{
-        label: 'Exportações (em milhões USD)',
-        data: [500, 520, 480, 510, 530],
-        backgroundColor: [
-          '#021A38',
-          '#03234D',
-          '#043065',
-          '#043873',
-          '#164882',
-          '#2A5991',
-          '#3F6AA1',
-        ],
-        borderWidth: 0
-      }]
-    };
-  
-    const options = {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Ano',
-            color: '#043873'
-          },
-          ticks: {
-            color: '#043873'
+    const canvas = document.getElementById('funnelChart');
+    const ctx = canvas.getContext('2d');
+
+    const exportData = [560, 500, 480, 420, 50];
+    const labels = ['Ferro', 'Plástico', 'Bovinos', 'Maquinarios', 'Roupas'];
+
+    const max = Math.max(...exportData);
+    const normalizedData = exportData.map(value => value / max);
+
+    new Chart(ctx, {
+      type: 'funnel',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: normalizedData,
+            backgroundColor: [
+              '#021A38',
+              '#03234D',
+              '#043065',
+              '#043873',
+              '#164882'
+            ],
+            datalabels: {
+              anchor: (context) => {
+                const value = context.dataset.data[context.dataIndex];
+                return value < 0.05 ? 'end' : 'start';
+              },
+              align: (context) => {
+                const value = context.dataset.data[context.dataIndex];
+                return value < 0.05 ? 'end' : 'center';
+              },
+              font: {
+                size: 16,
+              },
+              formatter: (value, context) => {
+                const label = context.chart.data.labels[context.dataIndex];
+                const realValue = exportData[context.dataIndex];
+                return `${label}\n${realValue.toLocaleString()} USD`;
+              },
+              color: '#fff',
+              textAlign: 'center'
+            }
           }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Ano',
-            color: '#043873'
-          },
-          ticks: {
-            color: '#043873'
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+          datalabels: {}, // necessário para ativar
+          legend: {
+            display: false
           }
         }
       },
-    };
-  
-    new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: options
+      plugins: [ChartDataLabels]
     });
   });
-
-  
