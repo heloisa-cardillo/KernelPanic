@@ -8,10 +8,10 @@ app = Flask(__name__, static_folder='static')
 # Dados para conectar ao banco de dados
 def get_db_connection():
     conn = pymysql.connect(
-        host='localhost',
+        host='34.151.195.196',
         user='root',
-        password='',
-        database='api',
+        password='kernelpanic',
+        database='api1',
         cursorclass=pymysql.cursors.DictCursor 
     )
     print("Conexão feita!")
