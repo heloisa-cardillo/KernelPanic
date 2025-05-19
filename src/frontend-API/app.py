@@ -2,16 +2,17 @@ from flask import Flask, render_template, request, jsonify
 from query import montar_query
 from query import montar_query_top5
 import pymysql
+import os
 
 app = Flask(__name__, static_folder='static')
 
 # Dados para conectar ao banco de dados
 def get_db_connection():
     conn = pymysql.connect(
-        host='34.151.195.196',
-        user='root',
-        password='kernelpanic',
-        database='api1',
+        host=os.environ.get("ENV_HOST"),
+        user=os.environ.get("ENV_USER"),
+        password=os.environ.get("ENV_PASSWORD"),
+        database=os.environ.get("ENV_DATABASE"),
         cursorclass=pymysql.cursors.DictCursor 
     )
     print("Conexão feita!")
