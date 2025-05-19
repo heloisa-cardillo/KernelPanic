@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from query import montar_query
+from query import montar_query_top5
 import pymysql
 
 app = Flask(__name__, static_folder='static')
@@ -36,6 +37,7 @@ def chartPage():
 @app.route('/filtros', methods=['POST'])
 def filtros_dados():
     filtros = request.get_json()
+    print("Filtros recebidos:", filtros)
 
     try:
         query, params = montar_query(filtros)
@@ -105,6 +107,40 @@ def filtros_dados():
         }
 
     return jsonify(resposta)
+
+@app.route('/filtros_funil', methods=['POST'])
+def filtros_dados_funil():
+    filtros = request.get_json()
+    print("Filtros recebidos:", filtros)
+
+    try:
+        query, params = montar_query_top5(filtros)
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+
+    conn = get_db_connection()
+    with conn.cursor() as cursor:
+        cursor.execute(query, params)
+        resultados = cursor.fetchall()
+    conn.close()
+
+    resposta = []
+    for row in resultados:
+        resposta.append({
+            "tipo": filtros.get("tipo"),
+            "ano": row.get("ano"),
+            "mes": row.get("mes") if "mes" in row else None,
+            "municipio": filtros.get("municipio"),
+            "pais": filtros.get("pais"),
+            "ncm": filtros.get("ncm"),
+            "total_valor_agregado": row.get("total_valor_agregado", 0),
+            "total_valor_fob": row.get("total_valor_fob", 0),
+            "total_kg_liquido": row.get("total_kg_liquido", 0),
+            "total_registros": row.get("total_registros", 0)
+        })
+
+    return jsonify(resposta)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
