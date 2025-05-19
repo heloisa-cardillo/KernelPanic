@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-funnel"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chartPage.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
+    <title>Gráficos</title>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#">
+            <img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" />
+        </a>
+
+
+        <section class="links">
+            <a href="/">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="#lineChartDiv" class="buttonHighlight">Balança Comercial</a>
+            <a href="#top5" class="buttonHighlight">Top 5 Produtos</a>
+        </section>
+    </header>
+
+
+    <main class="main">
+        <section class="chartSection">
+            <div>
+                <h1>Balança comercial do Estado de São Paulo(2013 - 2023)</h1>
+            </div>
+            <div class="filtersDiv">
+
+                <div class="filter">
+                    <label for="metrica">Métrica:</label>
+                    <select name="metrica" id="metrica">
+                        <option value="valor_FOB">Valor FOB</option>
+                        <option value="valor_agregado">Valor Agregado</option>
+                        <option value="total_registros">Quantidade movimentada</option>
+                        <option value="total_kg_liquido">KG movimentado</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="tipo">Tipo de movimentação:</label>
+                    <select name="tipo">
+                        <option value="importacao">Importação</option>
+                        <option value="exportacao">Exportação</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="ano">Ano:</label>
+                    <select name="ano">
+                        <option value="todos">Todos os anos</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="pais">País destino:</label>
+                    <select name="pais">
+                        <option value="todos">Todos paises</option>
+                        {% for pais in paises %}
+                        <option value="{{ pais['co_pais'] }}">{{ pais['no_pais'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="municipio">Municípios:</label>
+                    <select name="municipio">
+                        <option value="todos">Todo o Estado</option>
+                        {% for municipio in municipios %}
+                        <option value="{{ municipio['co_mun'] }}">{{ municipio['no_mun'] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter">
+                    <label for="ncm">Código NCM</label>
+                    <input type="text" name="ncm" class="caixa" placeholder="Código NCM" />
+                </div>
+                <button type="submit" id="buttonSubmitLine" class="buttonApply">Aplicar</button>
+            </div>
+
+            <section>
+                <div class="lineChartDiv">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <div id="loading" class="loading-container" style="display:none;">
+                    <div class="spinner"></div>
+                </div>
+            </section>
+        </section>
+
+        <section class="chartSection">
+            <div class="titulo">
+                <h1 class="titulo-texto">Top 5 Produtos por Valor Agregado</h1>
+            </div>
+
+            <div class="filtersDiv">
+                <div class="filter">
+                    <label for="metrica">Métrica:</label>
+                    <select name="metrica" id="metrica">
+                        <option value="valor_FOB">Valor FOB</option>
+                        <option value="valor_agregado">Valor Agregado</option>
+                        <option value="total_registros">Quantidade movimentada</option>
+                        <option value="total_kg_liquido">KG movimentado</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="tipo">Tipo de movimentação:</label>
+                    <select name="tipo">
+                        <option value="importacao">Importação</option>
+                        <option value="exportacao">Exportação</option>
+                    </select>
+                </div>
+                <div class="filter">
+                    <label for="ano">Ano:</label>
+                    <select name="ano">
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                        <option value="2019">2019</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+                    <label for="mes">Mês:</label>
+                    <select name="mes">
+                        <option value="Janeiro">Janeiro</option>
+                        <option value="Fevereiro">Fevereiro</option>
+                        <option value="Março">Março</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Maio">Maio</option>
+                        <option value="Junho">Junho</option>
+                        <option value="Julho">Julho</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Setembro">Setembro</option>
+                        <option value="Outubro">Outubro</option>
+                        <option value="Novembro">Novembro</option>
+                        <option value="Dezembro">Dezembro</option>
+                    </select>
+                </div>
+                <div class="filter">
+
+                    <label for="pais">País destino:</label>
+                    <select name="pais">
+                        <option value="eua">EUA</option>
+                        <option value="china">China</option>
+                    </select>
+                </div>
+
+                <div class="filter">
+
+                    <label for="pais">Municípios:</label>
+                    <select name="municipio">
+                        <option>Municipios</option>
+                    </select>
+                </div>
+                <div class="filter">
+
+                    <label for="carga">Código NCM</label>
+                    <input type="text" name="carga" class="caixa" placeholder="Código NCM" />
+                </div>
+                <button type="submit" class="buttonApply">Aplicar</button>
+                <div class="funnelChartDiv">
+                    <canvas id="funnelChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+<script src="{{ url_for('static', filename='js/lineChart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/funnelChart.js') }}"></script>
+
+</body>
+
+</html>

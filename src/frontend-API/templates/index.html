@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
   <title>Gráfico de Exportações</title>
 </head>
 
@@ -23,10 +23,10 @@
           <ul class="nav-links">
             <li><a href="#">Home</a></li>
             <li><a href="sobre.html">Sobre</a></li>
-            <li><a href="#grafico" class="button">Balança Comercial</a></li>
+            <li><a href="/graficos" class="button">Balança Comercial</a></li>
             <li><a href="#top5" class="button">Top 5 Produtos</a></li>
           </ul>
-        </nav>
+        </section>
       </nav>
     </header>
     <section class="sobre">

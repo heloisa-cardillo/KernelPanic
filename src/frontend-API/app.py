@@ -18,17 +18,21 @@ def get_db_connection():
     return conn
 
 @app.route("/")
-def website():
+def index():
+    return render_template('index.html')
+
+@app.route("/graficos")
+def chartPage():
     conn = get_db_connection()
     with conn.cursor() as cursor:
-        cursor.execute("SELECT * FROM pais")  
+        cursor.execute("SELECT * FROM pais")    
         resultadosPaises = cursor.fetchall()
         
         cursor.execute("Select * from municipios")
         resultadosMunicipios = cursor.fetchall()
 
     conn.close()
-    return render_template('index.html', paises=resultadosPaises, municipios=resultadosMunicipios)
+    return render_template('chartPage.html', paises=resultadosPaises, municipios=resultadosMunicipios)
 
 @app.route('/filtros', methods=['POST'])
 def filtros_dados():

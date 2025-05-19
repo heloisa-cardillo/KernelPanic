@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  background-color: #043873;
+  box-sizing: border-box;
+  height: 100%;
+  line-height: normal;
+  color: white;
+  font-family: "Space Grotesk";
+  margin: 4rem 8rem;
+}
+
+.lineChartDiv, .funnelChartDiv{
+    background-color: white;
+    border-radius: 10px;
+    height: 500px;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+
+.buttonApply {
+  padding: 12px 24px;
+  background-color: #0e4f99;
+  color: white;
+  font-size: 16px;
+  border: 1px solid white;
+  border-radius: 8px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: auto;
+  height: 45px;
+  transition: background-color 0.3s ease;
+}
+
+.buttonApply:hover {
+  background-color: #1866c2;
+}
+
+
+
+.filter{
+    display: flex;
+    flex-direction: column;
+}
+
+.filter select {
+    margin-top: 0.5rem;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #043873;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+.filter input{
+    padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #043873;
+  margin-top: 0.5rem;
+}
+
+.filter select:hover {
+  border-color: #043873;
+}
+
+
+.filtersDiv{
+    margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  row-gap: 0.3rem;
+}
+
+.chartSection{
+    margin-top: 5rem;
+}
+
+.main{
+    margin-top: 4rem;
+}
+
+
+.filter select,
+.filter input {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #043873;
+  outline: none;
+  height: 45px; 
+  box-sizing: border-box;
+}
+
+
+@media (max-width: 1024px) {
+  body {
+    margin: 2rem 4rem;
+  }
+
+  .filtersDiv {
+    gap: 2rem;
+    row-gap: 0.2rem;
+  }
+
+  .buttonApply {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+  body {
+    margin: 1rem;
+  }
+
+  .chartSection h1 {
+    font-size: 1.2rem;
+  }
+}
