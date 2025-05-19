@@ -1,0 +1,134 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  background-color: #043873;
+  box-sizing: border-box;
+  height: 100%;
+  line-height: normal;
+  color: white;
+  font-family: "Space Grotesk";
+  margin: 4rem 8rem;
+}
+
+.mainPage {
+  margin-top: 7rem;
+  display: grid;
+  grid-template-areas:
+    "options options"
+    "chart analises";
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.options {
+  grid-area: options;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.chartDiv {
+  grid-area: chart;
+  background-color: white;
+  border-radius: 10px;
+  height: auto;
+  min-height: 300px;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#chart {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 100%;
+}
+
+.analises {
+  grid-area: analises;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  width: 100%;
+}
+select,
+input[type="text"],
+input[type="number"] {
+  font-family: "Space Grotesk", sans-serif;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.buttonOption {
+  background-color: #ffffff;
+  color: #043873;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  max-width: 100%; 
+  flex: 1 1 50px;  
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttonOption:hover {
+  background-color: #043873;
+  color: #fff;
+}
+
+@media (max-width: 1024px) {
+  body {
+    margin: 2rem 4rem;
+  }
+
+  .mainPage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  .chartDiv {
+    grid-column: 1 / 2;
+  }
+
+  .analises {
+    grid-column: 1 / 2;
+  }
+
+  .options {
+    justify-content: center;
+  }
+
+  .buttonOption {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    margin: 1rem 1.5rem;
+  }
+
+  .buttonOption {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .analises h2 {
+    font-size: 1.2rem;
+  }
+}

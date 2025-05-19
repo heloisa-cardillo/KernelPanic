@@ -12,20 +12,19 @@
 
 <body>
   <div class="welcomePage">
-    <header>
-      <nav class="navbar">
-        <a href="#" class="nav-logo">
-          <img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" />
+    <header class="header">
+        <a href="#">
+            <img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" />
         </a>
-        <nav class="sidebar">
-          <ul class="nav-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="sobre.html">Sobre</a></li>
-            <li><a href="/graficos" class="button">Balança Comercial</a></li>
-            <li><a href="#top5" class="button">Top 5 Produtos</a></li>
-          </ul>
+
+
+        <section class="links">
+            <a href="/">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="/graficos" class="buttonHighlight">Balança Comercial</a>
+            <a href="/graficos" class="buttonHighlight">Top 5 Produtos</a>
+            <a href="/insights" class="buttonHighlight">Insights</a>
         </section>
-        </nav>
     </header>
     <section class="sobre">
       <div class="conteudo">
@@ -37,7 +36,7 @@
             período. A interface apresentará as informações de forma clara, com
             gráficos e tabelas.
           </p>
-          <button><a href="#grafico">Comece a consultar agora</a></button>
+          <button><a href="/graficos">Comece a consultar agora</a></button>
         </div>
         <div class="img-container">
           <img src="{{ url_for('static', filename='img/site-image.png') }}" alt="site-image" class="img" />
