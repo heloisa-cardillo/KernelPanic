@@ -126,14 +126,14 @@
 
                 <div class="filter">
                     <label for="tipo">Tipo de movimentação:</label>
-                    <select name="tipo">
+                    <select name="tipo" id="funnel-tipo">
                         <option value="importacao">Importação</option>
                         <option value="exportacao">Exportação</option>
                     </select>
                 </div>
                 <div class="filter">
                     <label for="ano">Ano:</label>
-                    <select name="ano">
+                    <select name="ano" id="funnel-ano">
                         <option value="2013">2013</option>
                         <option value="2014">2014</option>
                         <option value="2015">2015</option>
@@ -150,7 +150,7 @@
 
                 <div class="filter">
                     <label for="mes">Mês:</label>
-                    <select name="mes">
+                    <select name="mes" id="funnel-mes">
                         <option value="Janeiro">Janeiro</option>
                         <option value="Fevereiro">Fevereiro</option>
                         <option value="Março">Março</option>
@@ -168,25 +168,25 @@
                 <div class="filter">
 
                     <label for="pais">País destino:</label>
-                    <select name="pais">
-                        <option value="eua">EUA</option>
-                        <option value="china">China</option>
+                    <select name="pais" id="funnel-pais">
+                        <option value="todos">Todos</option>
+                        {% for pais in paises %}
+                        <option value="{{ pais['co_pais'] }}">{{ pais['no_pais'] }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
                 <div class="filter">
 
                     <label for="pais">Municípios:</label>
-                    <select name="municipio">
-                        <option>Municipios</option>
+                    <select name="municipio" id="funnel-municipio">
+                        <option value="todos">Todos</option>
+                        {% for municipio in municipios %}
+                        <option value="{{ municipio['co_mun'] }}">{{ municipio['no_mun'] }}</option>
+                        {% endfor %}
                     </select>
                 </div>
-                <div class="filter">
-
-                    <label for="carga">Código NCM</label>
-                    <input type="text" name="carga" class="caixa" placeholder="Código NCM" />
-                </div>
-                <button type="submit" class="buttonApply">Aplicar</button>
+                <button type="submit" class="buttonApply" id="buttonSubmitFunnel">Aplicar</button>
                 <div class="funnelChartDiv">
                     <canvas id="funnelChart"></canvas>
                 </div>
