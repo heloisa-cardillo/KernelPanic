@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, jsonify
 from query import montar_query
 from query import montar_query_top5
+from dotenv import load_dotenv
 import pymysql
 import os
+
+load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 
@@ -17,6 +20,7 @@ def get_db_connection():
     )
     print("Conexão feita!")
     return conn
+
 
 @app.route("/")
 def index():
@@ -34,6 +38,11 @@ def chartPage():
 
     conn.close()
     return render_template('chartPage.html', paises=resultadosPaises, municipios=resultadosMunicipios)
+
+@app.route("/insights")
+def insightsPage():
+
+    return render_template('insights.html')
 
 @app.route('/filtros', methods=['POST'])
 def filtros_dados():
