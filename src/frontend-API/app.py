@@ -34,6 +34,10 @@ def chartPage():
     conn.close()
     return render_template('chartPage.html', paises=resultadosPaises, municipios=resultadosMunicipios)
 
+@app.route("/sobre.html")
+def sobre():
+    return render_template('sobre.html')
+
 @app.route('/filtros', methods=['POST'])
 def filtros_dados():
     filtros = request.get_json()
