@@ -12,10 +12,10 @@ app = Flask(__name__, static_folder='static')
 # Dados para conectar ao banco de dados
 def get_db_connection():
     conn = pymysql.connect(
-        host=os.environ.get("ENV_HOST"),
-        user=os.environ.get("ENV_USER"),
-        password=os.environ.get("ENV_PASSWORD"),
-        database=os.environ.get("ENV_DATABASE"),
+        host="localhost",
+        user="root",
+        password="",
+        database="api",
         cursorclass=pymysql.cursors.DictCursor 
     )
     print("Conexão feita!")
@@ -127,6 +127,15 @@ def filtros_dados_funil():
     print("Filtros recebidos:", filtros)
 
     try:
+      
+        filtros = {
+            "tipo": filtros.get("tipo"),
+            "metrica": filtros.get("metrica"),
+            "ano": filtros.get("ano"),
+            "mes": filtros.get("mes"),
+            "pais": filtros.get("pais"),
+            "municipio": filtros.get("municipio")
+        }
         query, params = montar_query_top5(filtros)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
@@ -140,19 +149,13 @@ def filtros_dados_funil():
     resposta = []
     for row in resultados:
         resposta.append({
-            "tipo": filtros.get("tipo"),
-            "ano": row.get("ano"),
-            "mes": row.get("mes") if "mes" in row else None,
-            "municipio": filtros.get("municipio"),
-            "pais": filtros.get("pais"),
-            "ncm": filtros.get("ncm"),
-            "total_valor_agregado": row.get("total_valor_agregado", 0),
-            "total_valor_fob": row.get("total_valor_fob", 0),
-            "total_kg_liquido": row.get("total_kg_liquido", 0),
-            "total_registros": row.get("total_registros", 0)
+            "nome_produto": row["nome_produto"],
+            "valor": row[f"total_{filtros['metrica']}"]
         })
 
     return jsonify(resposta)
+
+
 
 
 if __name__ == '__main__':

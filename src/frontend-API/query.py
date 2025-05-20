@@ -82,7 +82,10 @@ def montar_query_top5(filtros):
         SELECT 
             t.co_sh4 AS codigo_ncm,
             sh.no_sh4_por AS nome_produto,
-            SUM(t.valor_agregado) AS total_valor_agregado
+            SUM(t.valor_agregado) AS total_valor_agregado,
+            SUM(t.kg_liquido_expt) as total_kg_liquido,
+            SUM(t.vl_fob_expt) AS total_valor_fob,
+            COUNT(*) AS total_registros
         FROM {tabela} t
         JOIN sh ON sh.co_sh4 = t.co_sh4
         JOIN municipios m ON m.co_mun = t.co_mun
@@ -111,9 +114,18 @@ def montar_query_top5(filtros):
     if condicoes:
         sql += " WHERE " + " AND ".join(condicoes)
 
-    sql += """
+    if filtros.get("metrica") == "valor_FOB":
+        metrica = "total_valor_fob"
+    elif filtros.get("metrica") == "valor_agregado":
+        metrica = "total_valor_agregado"
+    elif filtros.get("metrica") == "total_registros":
+        metrica = "total_registros"
+    elif filtros.get("metrica") == "total_kg_liquido":
+        metrica = "total_kg_liquido"
+
+    sql += f""" 
         GROUP BY t.co_sh4, sh.no_sh4_por
-        ORDER BY total_valor_agregado DESC
+        ORDER BY {metrica} DESC
         LIMIT 5
     """
 
