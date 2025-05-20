@@ -45,7 +45,6 @@ def sobre():
 
 @app.route("/insights")
 def insightsPage():
-
     return render_template('insights.html')
 
 @app.route('/filtros', methods=['POST'])
