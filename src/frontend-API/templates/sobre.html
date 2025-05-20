@@ -1,1 +1,114 @@
-<!-- template do sobre -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sobre.css') }}" />
+    <title>Sobre</title>
+</head>
+
+<body>
+    <header class="header">
+        <a href="#">
+            <img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" />
+        </a>
+
+        <section class="links">
+            <a href="/">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="#lineChartDiv" class="buttonHighlight">Balança Comercial</a>
+            <a href="#top5" class="buttonHighlight">Top 5 Produtos</a>
+            <a href="#top5" class="buttonHighlight">Insights</a>
+        </section>
+    </header>
+
+    <main class="mainPage">
+        <h1>Sobre Nós </h1>
+        <div class="content-grid">
+            <div class="equipe">
+                <table class="equipe-table">
+                    <thead>
+                        <tr>
+                            <th>Função</th>
+                            <th>Nome</th>
+                            <th>LinkedIn</th>
+                            <th>GitHub</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Daniel Porto Renó Sás Piloto</td>
+                            <td>Scrum Master</td>
+                            <td><a href="https://www.linkedin.com/in/daniel-piloto-98b717226/">LinkedIn</a></td>
+                            <td><a href="https://github.com/danprsp">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Vitor Serpa da Silva</td>
+                            <td>Product Owner</td>
+                            <td><a href="https://www.linkedin.com/in/vitor-serpa-925b46322/">LinkedIn</a></td>
+                            <td><a href="https://github.com/VitorSerpa">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Henry Vilela Silva Tito</td>
+                            <td>Dev Team</td>
+                            <td><a href="https://www.linkedin.com/in/henry-tito-989b4b354/">LinkedIn</a></td>
+                            <td><a href="https://github.com/HenryTito">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Lucas Daniel Vasconcellos do Prado</td>
+                            <td>Dev Team</td>
+                            <td><a href="https://www.linkedin.com/in/lucas-do-prado-30843b33a/">LinkedIn</a></td>
+                            <td><a
+                                    href="https://github.com/orgs/Kernel-Panic-FatecSjc/people/lucasdaniel0122">GitHub</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Miguel Tomio Toledo Nonaka</td>
+                            <td>Dev Team</td>
+                            <td>LinkedIn</td>
+                            <td><a href="https://github.com/miguelnonaka">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Paula Emy Tamay</td>
+                            <td>Dev Team</td>
+                            <td><a href="https://www.linkedin.com/in/paula-tamay-7a168228a/">LinkedIn</a></td>
+                            <td><a href="https://github.com/PaulaEmy">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Vinícius da Silva Leite</td>
+                            <td>Dev Team</td>
+                            <td><a href="https://www.linkedin.com/in/vin%C3%ADcius-leite-4792b02ba/">LinkedIn</a></td>
+                            <td><a href="https://github.com/vinislvleite">GitHub</a></td>
+                        </tr>
+                        <tr>
+                            <td>Heloisa Cardillo</td>
+                            <td>Dev Team</td>
+                            <td><a href="https://www.linkedin.com/in/heloisa-cardillo-lima/">LinkedIn</a></td>
+                            <td><a href="https://github.com/heloisa-cardillo">GitHub</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="info-container">
+                <div class="metodologia">
+                    <h2>Metodologia</h2>
+                    <p>Utilizamos Scrum como metodologia ágil, dividindo o desenvolvimento em Sprints com MVPs bem
+                        definidos. Trabalhamos com ciclos iterativos, priorizando entregas de valor através de um
+                        Backlog de Produto estruturado com base nos requisitos do cliente, garantindo adaptabilidade e
+                        comunicação eficiente ao longo de todo o projeto.</p>
+                </div>
+                <div class="principios">
+                    <h2>Princípios Kernel Panic</h2>
+                    <p>Escolha suas tarefas e cumpra prazos; peça ajuda sem vergonha; participe ativamente; respeite
+                        todos no processo de aprendizagem; e lembre sempre: "Somos FELIZES porque vamos aprender mais!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
