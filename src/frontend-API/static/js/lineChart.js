@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     fill: false,
                     borderColor: "#043873",
                     backgroundColor: "#043873",
-                    tension: 0.3,
+                    tension: 0.0,
                     pointRadius: 5,
                     pointHoverRadius: 7,
                 },
