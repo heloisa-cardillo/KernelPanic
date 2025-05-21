@@ -94,13 +94,11 @@
 
     const button = document.getElementById("buttonSubmitFunnel");
     if (button) {
-      console.log("Clicou");
       button.addEventListener("click", function (event) {
         event.preventDefault();
         document.getElementById("loading").style.display = "flex";
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000000);
-
+        const timeoutId = setTimeout(() => controller.abort(), 180000);
         const formData = {
           metrica: document.getElementById("funnel-metrica").value,
           tipo: document.getElementById("funnel-tipo").value,
@@ -110,39 +108,29 @@
           municipio: document.getElementById("funnel-municipio").value,
         };
 
-        console.log(formData);
-
         fetch("http://127.0.0.1:5000/filtros_funil", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
-          signal: controller.signal,
+          //signal: controller.signal,
         })
           .then((response) => response.json())
           .then((receivedData) => {
-            if (!receivedData || receivedData.length === 0) {
-              console.error("Nenhum dado recebido");
+            console.log("Dados recebidos:", receivedData);
+            if (receivedData && Array.isArray(receivedData)) {
+              dataSalva = receivedData;
+              exportData = dataSalva.map((d) => d.total_valor_agregado);
+            } else {
+              console.error("Formato dos dados inesperado:", receivedData);
               return;
             }
-
-            labels = dataSalva.map((d) => {
-              if (d.mes && d.mes !== "todos") {
-                return mesesNomes[Number(d.mes)] || d.mes;
-              }
-              return d.ano || "N/D";
-            });
-
-            labels = receivedData.map((d) => d.nome_produto);
-            exportData = receivedData.map((d) => d.valor);
-            const max = Math.max(...exportData);
-            const normalizedData = exportData.map((value) => value / max);
-
-            chartFunnel.data.labels = labels;
-            chartFunnel.data.datasets[0].data = normalizedData;
-            chartFunnel.update();
-
-            console.log("Gráfico funil atualizado com:", labels, exportData);
+            labels = dataSalva.map(
+              (d) => d.nome_produto || "Produto desconhecido"
+            );
+            atualizarGrafico();
+            console.log(receivedData);
           })
+
           .catch((error) => {
             console.error("Erro ao enviar os dados:", error);
           })
@@ -153,5 +141,22 @@
       });
     }
   });
-})();
 
+  function atualizarGrafico() {
+    if (!dataSalva || !Array.isArray(dataSalva)) {
+      console.error("Dados inválidos para atualizar o gráfico:", dataSalva);
+      return;
+    }
+    valores = dataSalva.map((d) => d.total_valor_agregado);
+    chartFunnel.data.datasets[0].label = "Valor agregado";
+    chartFunnel.data.labels = labels;
+    chartFunnel.data.datasets[0].data = valores;
+    chartFunnel.update();
+    console.log(
+      "Gráfico atualizado com labels:",
+      labels,
+      "e valores:",
+      valores
+    );
+  }
+})();
