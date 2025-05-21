@@ -56,6 +56,7 @@ def filtros_dados():
         query, params = montar_query(filtros)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
+    
 
     conn = get_db_connection()
     with conn.cursor() as cursor:
@@ -123,6 +124,9 @@ def filtros_dados():
 
 @app.route('/filtros_funil', methods=['POST'])
 def filtros_dados_funil():
+    print("Request data raw:", request.data)
+    filtros = request.get_json()
+    print("Filtros recebidos:", filtros)
     filtros = request.get_json()
     print("Filtros recebidos:", filtros)
 
@@ -130,6 +134,9 @@ def filtros_dados_funil():
         query, params = montar_query_top5(filtros)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
+    
+    print("Query SQL:", query)
+    print("Parâmetros:", params)
 
     conn = get_db_connection()
     with conn.cursor() as cursor:
@@ -154,7 +161,7 @@ def filtros_dados_funil():
             "total_registros": row.get("total_registros", 0),
             "nome_produto": row.get("nome_produto", "").split(";")[0].split(",")[0][:50]
         })
-
+    print(resultados)
     return jsonify(resultados=resposta)
 
 

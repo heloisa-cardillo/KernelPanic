@@ -82,6 +82,8 @@ def montar_query_top5(filtros):
         SELECT 
             t.co_sh4 AS codigo_ncm,
             sh.no_sh4_por AS nome_produto,
+            t.co_ano AS ano,
+            t.co_mes AS mes,
             SUM(t.valor_agregado) AS total_valor_agregado,
             SUM(t.kg_liquido_expt) as total_kg_liquido,
             SUM(t.vl_fob_expt) AS total_valor_fob,
@@ -95,13 +97,17 @@ def montar_query_top5(filtros):
     condicoes = []
     valores = []
 
-    if filtros.get("ano") and filtros["ano"] != "todos":
-        condicoes.append("t.co_ano = %s")
-        valores.append(filtros["ano"])
 
-    if filtros.get("mes") and filtros["mes"] != "todos":
+    ano = filtros.get("ano")
+    if ano is not None and ano != "" and ano != "todos":
+        condicoes.append("t.co_ano = %s")
+        valores.append(int(ano))
+
+    mes = filtros.get("mes")
+    if mes is not None and mes != "" and mes != "todos":
         condicoes.append("t.co_mes = %s")
-        valores.append(filtros["mes"])
+        valores.append(int(mes))
+
 
     if filtros.get("municipio") and filtros["municipio"] != "todos":
         condicoes.append("m.co_mun = %s")
