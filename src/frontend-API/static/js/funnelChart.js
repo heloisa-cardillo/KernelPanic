@@ -107,6 +107,7 @@
           pais: document.getElementById("funnel-pais").value,
           municipio: document.getElementById("funnel-municipio").value,
         };
+        console.log(formData);
 
         fetch("http://127.0.0.1:5000/filtros_funil", {
           method: "POST",
@@ -117,8 +118,8 @@
           .then((response) => response.json())
           .then((receivedData) => {
             console.log("Dados recebidos:", receivedData);
-            if (receivedData && Array.isArray(receivedData)) {
-              dataSalva = receivedData;
+            if (receivedData && Array.isArray(receivedData.resultados)) {
+              dataSalva = receivedData.resultados;
               exportData = dataSalva.map((d) => d.total_valor_agregado);
             } else {
               console.error("Formato dos dados inesperado:", receivedData);
