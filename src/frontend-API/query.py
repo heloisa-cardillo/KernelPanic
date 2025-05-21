@@ -122,6 +122,8 @@ def montar_query_top5(filtros):
         metrica = "total_registros"
     elif filtros.get("metrica") == "total_kg_liquido":
         metrica = "total_kg_liquido"
+    else:
+        raise ValueError("Métrica inválida ou não informada.")
 
     sql += f""" 
         GROUP BY t.co_sh4, sh.no_sh4_por

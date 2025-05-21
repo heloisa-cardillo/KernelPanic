@@ -155,7 +155,8 @@ def filtros_dados_funil():
             "nome_produto": row.get("nome_produto", "").split(";")[0].split(",")[0][:50]
         })
 
-    return jsonify(resposta)
+    return jsonify(resultados=resposta)
+
 
 
 
