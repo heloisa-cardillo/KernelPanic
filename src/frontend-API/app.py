@@ -127,15 +127,6 @@ def filtros_dados_funil():
     print("Filtros recebidos:", filtros)
 
     try:
-      
-        filtros = {
-            "tipo": filtros.get("tipo"),
-            "metrica": filtros.get("metrica"),
-            "ano": filtros.get("ano"),
-            "mes": filtros.get("mes"),
-            "pais": filtros.get("pais"),
-            "municipio": filtros.get("municipio")
-        }
         query, params = montar_query_top5(filtros)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
@@ -148,13 +139,23 @@ def filtros_dados_funil():
 
     resposta = []
     for row in resultados:
+        total_valor_fob = row.get("total_valor_fob", 0)
+        total_kg_liquido = row.get("total_kg_liquido", 0)
+        valor_agregado = round(float(total_valor_fob) / float(total_kg_liquido), 2) if total_kg_liquido else 0
         resposta.append({
-            "nome_produto": row["nome_produto"],
-            "valor": row[f"total_{filtros['metrica']}"]
+            "tipo": filtros.get("tipo"),
+            "ano": row.get("ano"),
+            "mes": row.get("mes") if "mes" in row else None,
+            "municipio": filtros.get("municipio"),
+            "pais": filtros.get("pais"),
+            "total_valor_agregado": valor_agregado,
+            "total_valor_fob": total_valor_fob,
+            "total_kg_liquido": total_kg_liquido,
+            "total_registros": row.get("total_registros", 0),
+            "nome_produto": row.get("nome_produto", "").split(";")[0].split(",")[0][:50]
         })
 
     return jsonify(resposta)
-
 
 
 
