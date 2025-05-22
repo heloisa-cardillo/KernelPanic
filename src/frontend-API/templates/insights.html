@@ -1,23 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insights</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/insights.css') }}" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Insights</title>
 </head>
-
 <body>
     <header class="header">
-        <a href="#">
-            <img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" />
-        </a>
-
-
+        <a href="#"><img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" /></a>
         <section class="links">
             <a href="/">Home</a>
             <a href="sobre.html">Sobre</a>
@@ -28,28 +22,28 @@
     </header>
 
     <main class="mainPage">
-
         <h1>Insights</h1>
-        <div class="options">
-            <button class="buttonOption">Paises mais importantes para a economia brasileira</button>
-            <button class="buttonOption">Municipios mais importantes para a economia brasileira</button>
-            <button class="buttonOption">Paises com crescimento na economia brasileira</button>
-            <button class="buttonOption">Paises em decaimento na economia brasileira</button>
-        </div>
-        <div class="chartDiv">
-            <canvas id="chart"></canvas>
-        </div>
+
         <div class="analises">
-            <h2>Analises</h2>
-            <select name="" id="">
-                <option value="">Importação</option>
-                <option value="">Exportação</option>
+            <label for="tipo">Tipo de Análise:</label>
+            <select id="tipo">
+                <option value="importacao">Importação</option>
+                <option value="exportacao" selected>Exportação</option>
             </select>
         </div>
 
+        <div class="options">
+            <button class="buttonOption" data-id="A">Países mais importantes</button>
+            <button class="buttonOption" data-id="B">Municípios mais importantes</button>
+            <button class="buttonOption" data-id="C">Crescimento</button>
+            <button class="buttonOption" data-id="D">Decaimento</button>
+        </div>
+
+        <div class="chartDiv">
+            <canvas id="chart" width="800" height="400"></canvas>
+        </div>
     </main>
 
+    <script src="{{ url_for('static', filename='js/insightChart.js') }}"></script>
 </body>
-<script src="{{ url_for('static', filename='js/insightsChart.js') }}"></script>
-
 </html>
