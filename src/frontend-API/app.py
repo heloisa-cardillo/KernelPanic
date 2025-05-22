@@ -14,7 +14,7 @@ def get_db_connection():
     conn = pymysql.connect(
         host="localhost",
         user="root",
-        password="",
+        password="root",
         database="api",
         cursorclass=pymysql.cursors.DictCursor 
     )
@@ -63,7 +63,8 @@ def filtros_dados():
         cursor.execute(query, params)
         resultados = cursor.fetchall()
     conn.close()
-
+    print("Query Filtro de Linha", query)
+    print("Resultados da Consulta",resultados)
     if filtros.get("ano") != "todos" and filtros.get("mes") == "todos":
         resposta = []
         for mes in range(1, 13):
@@ -127,28 +128,28 @@ def filtros_dados_funil():
     print("Request data raw:", request.data)
     filtros = request.get_json()
     print("Filtros recebidos:", filtros)
-    filtros = request.get_json()
-    print("Filtros recebidos:", filtros)
-
+ 
     try:
         query, params = montar_query_top5(filtros)
     except ValueError as e:
         return jsonify({'error': str(e)}), 400
     
-    print("Query SQL:", query)
+    print("Query SQL Funil:", query)
     print("Parâmetros:", params)
 
     conn = get_db_connection()
     with conn.cursor() as cursor:
         cursor.execute(query, params)
         resultados = cursor.fetchall()
+        print(resultados)
     conn.close()
-
     resposta = []
+    
     for row in resultados:
         total_valor_fob = row.get("total_valor_fob", 0)
         total_kg_liquido = row.get("total_kg_liquido", 0)
         valor_agregado = round(float(total_valor_fob) / float(total_kg_liquido), 2) if total_kg_liquido else 0
+        #valor_agregado = row.get("total_valor_agregado",0)
         resposta.append({
             "tipo": filtros.get("tipo"),
             "ano": row.get("ano"),

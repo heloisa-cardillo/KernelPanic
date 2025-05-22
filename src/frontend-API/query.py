@@ -79,19 +79,17 @@ def montar_query_top5(filtros):
         raise ValueError("Informe se é 'importação' ou 'exportação' no campo 'tipo'.")
 
     sql = f"""
-        SELECT 
+        SELECT
             t.co_sh4 AS codigo_ncm,
             sh.no_sh4_por AS nome_produto,
-            t.co_ano AS ano,
-            t.co_mes AS mes,
-            SUM(t.valor_agregado) AS total_valor_agregado,
-            SUM(t.kg_liquido_expt) as total_kg_liquido,
-            SUM(t.vl_fob_expt) AS total_valor_fob,
+            SUM(t.vl_fob_expt) AS total_valor_fob,     -- Soma do valor FOB
+            SUM(t.kg_liquido_expt) AS total_kg_liquido, -- Soma do kg líquido
+            (SUM(t.vl_fob_expt) / SUM(t.kg_liquido_expt)) AS valor_por_kg, -- O NOVO CÁLCULO
             COUNT(*) AS total_registros
         FROM {tabela} t
-        JOIN sh ON sh.co_sh4 = t.co_sh4
-        JOIN municipios m ON m.co_mun = t.co_mun
-        JOIN pais p ON p.co_pais = t.co_pais
+            JOIN sh ON sh.co_sh4 = t.co_sh4
+            JOIN municipios m ON m.co_mun = t.co_mun
+            JOIN pais p ON p.co_pais = t.co_pais
     """
 
     condicoes = []
@@ -99,41 +97,41 @@ def montar_query_top5(filtros):
 
 
     ano = filtros.get("ano")
-    if ano is not None and ano != "" and ano != "todos":
-        condicoes.append("t.co_ano = %s")
-        valores.append(int(ano))
+    if ano and ano != "todos":
+        condicoes.append(f"t.co_ano = {ano}")
+        #valores.append(int(ano))
 
     mes = filtros.get("mes")
-    if mes is not None and mes != "" and mes != "todos":
-        condicoes.append("t.co_mes = %s")
-        valores.append(int(mes))
+    if mes and mes != "todos":
+        condicoes.append(f"t.co_mes = {mes}")
+        #valores.append(int(mes))
+    
+    municipio = filtros.get("municipio")
 
+    if municipio and municipio != "todos":
+        condicoes.append(f"m.co_mun = {municipio}")
+        #valores.append(filtros["municipio"])
+    pais = filtros.get("pais")
 
-    if filtros.get("municipio") and filtros["municipio"] != "todos":
-        condicoes.append("m.co_mun = %s")
-        valores.append(filtros["municipio"])
-
-    if filtros.get("pais") and filtros["pais"] != "todos":
-        condicoes.append("(p.co_pais = %s OR p.co_pais_isoa3 = %s OR p.no_pais = %s)")
-        valores.extend([filtros["pais"]] * 3)
+    if pais and pais != "todos":
+        condicoes.append(f"(p.co_pais = {pais} OR p.co_pais_isoa3 = {pais} OR p.no_pais = {pais})")
+        #valores.extend(pais * 3)
 
     if condicoes:
-        sql += " WHERE " + " AND ".join(condicoes)
+        sql += " WHERE "
+        fds = True
+        for arg in condicoes:
+            if fds:
+                sql+=f" {arg}"
+                fds=False
+            else:
+                sql += f" AND {arg}"
 
-    if filtros.get("metrica") == "valor_FOB":
-        metrica = "total_valor_fob"
-    elif filtros.get("metrica") == "valor_agregado":
-        metrica = "total_valor_agregado"
-    elif filtros.get("metrica") == "total_registros":
-        metrica = "total_registros"
-    elif filtros.get("metrica") == "total_kg_liquido":
-        metrica = "total_kg_liquido"
-    else:
-        raise ValueError("Métrica inválida ou não informada.")
 
     sql += f""" 
         GROUP BY t.co_sh4, sh.no_sh4_por
-        ORDER BY {metrica} DESC
+        HAVING SUM(t.kg_liquido_expt) > 0 
+        ORDER BY valor_por_kg DESC
         LIMIT 5
     """
 
