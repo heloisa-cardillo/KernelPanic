@@ -82,59 +82,50 @@ def montar_query_top5(filtros):
         SELECT
             t.co_sh4 AS codigo_ncm,
             sh.no_sh4_por AS nome_produto,
-            SUM(t.vl_fob_expt) AS total_valor_fob,     -- Soma do valor FOB
-            SUM(t.kg_liquido_expt) AS total_kg_liquido, -- Soma do kg líquido
-            (SUM(t.vl_fob_expt) / SUM(t.kg_liquido_expt)) AS valor_por_kg, -- O NOVO CÁLCULO
+            SUM(t.vl_fob_expt) AS total_valor_fob,
+            SUM(t.kg_liquido_expt) AS total_kg_liquido,
+            (SUM(t.vl_fob_expt) / NULLIF(SUM(t.kg_liquido_expt), 0)) AS valor_por_kg,
             COUNT(*) AS total_registros
         FROM {tabela} t
-            JOIN sh ON sh.co_sh4 = t.co_sh4
-            JOIN municipios m ON m.co_mun = t.co_mun
-            JOIN pais p ON p.co_pais = t.co_pais
+        JOIN sh ON sh.co_sh4 = t.co_sh4
+        JOIN municipios m ON m.co_mun = t.co_mun
+        JOIN pais p ON p.co_pais = t.co_pais
     """
 
     condicoes = []
     valores = []
 
-
-    ano = filtros.get("ano")
-    if ano and ano != "todos":
+    if (ano := filtros.get("ano")) and ano != "todos":
         condicoes.append(f"t.co_ano = {ano}")
-        #valores.append(int(ano))
 
-    mes = filtros.get("mes")
-    if mes and mes != "todos":
+    if (mes := filtros.get("mes")) and mes != "todos":
         condicoes.append(f"t.co_mes = {mes}")
-        #valores.append(int(mes))
-    
-    municipio = filtros.get("municipio")
 
-    if municipio and municipio != "todos":
+    if (municipio := filtros.get("municipio")) and municipio != "todos":
         condicoes.append(f"m.co_mun = {municipio}")
-        #valores.append(filtros["municipio"])
-    pais = filtros.get("pais")
 
-    if pais and pais != "todos":
-        condicoes.append(f"(p.co_pais = {pais} OR p.co_pais_isoa3 = {pais} OR p.no_pais = {pais})")
-        #valores.extend(pais * 3)
+    if (pais := filtros.get("pais")) and pais != "todos":
+        condicoes.append(f"(p.co_pais = {pais} OR p.co_pais_isoa3 = '{pais}' OR p.no_pais = '{pais}')")
 
     if condicoes:
-        sql += " WHERE "
-        fds = True
-        for arg in condicoes:
-            if fds:
-                sql+=f" {arg}"
-                fds=False
-            else:
-                sql += f" AND {arg}"
+        sql += " WHERE " + " AND ".join(condicoes)
 
+    sql += " GROUP BY t.co_sh4, sh.no_sh4_por HAVING SUM(t.kg_liquido_expt) > 0 "
 
-    sql += f""" 
-        GROUP BY t.co_sh4, sh.no_sh4_por
-        HAVING SUM(t.kg_liquido_expt) > 0 
-        ORDER BY valor_por_kg DESC
-        LIMIT 5
-    """
+    # Critério de ordenação
+    criterio = filtros.get("metrica", "valor_agregado")  
+    if criterio == "valor_agregado":
+        ordem = "valor_por_kg DESC"
+    elif criterio == "valor_FOB":
+        ordem = "total_valor_fob DESC"
+    elif criterio == "total_registros":
+        ordem = "total_registros DESC"
+    elif criterio == "total_kg_liquido":
+        ordem = "total_kg_liquido DESC"
+    else:
+        raise ValueError("Critério inválido. Use: valor_agregado, valor_fob, quantidade ou kg.")
+
+    sql += f" ORDER BY {ordem} LIMIT 5"
 
     return sql, valores
-
 

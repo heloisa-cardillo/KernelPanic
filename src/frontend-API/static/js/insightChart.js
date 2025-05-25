@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+
     const ctx = document.getElementById("chart").getContext("2d");
 
     const cores = ["#043873", "#28a745", "#ffc107", "#dc3545", "#6f42c1"];
 
     const labelsPadrao = ["Total"];
-    const labelsCrescimento = ["2022", "2023"];
+    const labelsCrescimento = ["2022", "2024"];
     
     const dados = {
         exportacao: {
@@ -31,25 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             C: {
-                titulo: "Crescimento na Exportação (2022 → 2023)",
+                titulo: "Crescimento na Exportação (2022 → 2024)",
                 labels: labelsCrescimento,
                 data: {
-                    "Estados Unidos": [11624031310, 12727991939],
-                    "México": [2343798510, 2901121308],
-                    "Canadá": [1096494249, 1623949057],
-                    "Portugal": [269108278, 596332479],
-                    "Índia": [1029307299, 1355547668]
+                  "Estados Unidos": [11624031310 , 13849529960 ],
+                  "Emirados Árabes Unidos": [880438763 , 1535707534 ],
+                  "Índia": [1029307299 , 1659197438 ],
+                  "Indonésia": [666655421 , 1295888873 ],
+                    "Iraque": [175382251 , 575824850 ]
                 }
             },
             D: {
-                titulo: "Decaimento na Exportação (2022 → 2023)",
+                titulo: "Decaimento na Exportação (2022 → 2024)",
                 labels: labelsCrescimento,
                 data: {
-                    "Chile": [3026472808, 2602835241],
-                    "Espanha": [1543024501, 1124119954],
-                    "Colômbia": [1910793279, 1525883300],
-                    "Irã": [721871836, 377729774],
-                    "Paquistão": [371383307, 67508393]
+                    "China": [12626084905  , 10512739878 ],
+                    "Chile     ": [3026472808 , 2091395569 ],
+                    "Espanha   ": [1543024501 , 800321615 ],
+                    "Irã       ": [721871836 , 372067829 ],
+                    "Argentina ": [6565631700 , 6266880053 ],
                 }
             }
         },
@@ -77,25 +79,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             },
             C: {
-                titulo: "Crescimento na Importação (2022 → 2023)",
+                titulo: "Crescimento na Importação (2022 → 2024)",
                 labels: labelsCrescimento,
                 data: {
-                    "Rússia": [810306293, 1626201414],
-                    "Itália": [2153819949, 2369587539],
-                    "Chile": [840021158, 957689751],
-                    "Suíça": [1264474348, 1374527310],
-                    "Uruguai": [239867640, 346069662]
+                    "Rússia": [810306293  , 1734920106   ],
+                    "Suíça": [1264474348  , 1264474348   ],
+                    "Porto Rico": [355050022  , 680537153   ],
+                    "Itália": [2153819949  , 2477541860  ],
+                    "Chile": [840021158  , 1128553490     ]
                 }
             },
             D: {
-                titulo: "Decaimento na Importação (2022 → 2023)",
+                titulo: "Decaimento na Importação (2013 → 2024)",
                 labels: labelsCrescimento,
                 data: {
-                    "China": [18295086088, 14648177493],
-                    "Estados Unidos": [14750539777, 12662876927],
-                    "Índia": [3732849179, 2591456583],
-                    "Nigéria": [826360418, 86787013],
-                    "Indonésia": [677927576, 378241401]
+                  "China": [18295086088   , 16197552101  ],
+                  "Estados Unidos": [14750539777   , 12791132928 ],
+                  "Índia": [3732849179  , 2630384172 ],
+                    "Nigéria": [826360418   , 104225045 ],
+                    "Arábia Saudita": [549347793  , 96605523 ]
                 }
             }
         }
@@ -120,13 +122,25 @@ document.addEventListener("DOMContentLoaded", () => {
         type: "bar",
         data: { labels: info.labels, datasets },
         options: {
-          responsive: true,
-          plugins: { legend: { position: "top" } },
-          scales: {
-            x: { title: { display: true, text: "Período" } },
-            y: { beginAtZero: true, title: { display: true, text: info.titulo } }
-          }
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { position: "top" } },
+  scales: {
+    x: { title: { display: true, text: "Período" } },
+    y: { 
+      beginAtZero: true, 
+      title: { display: true, text: info.titulo },
+      ticks: {
+        callback: function(value) {
+          if (value >= 1e9) return (value / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+          if (value >= 1e6) return (value / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+          if (value >= 1e3) return (value / 1e3).toFixed(1).replace(/\.0$/, '') + 'mil';
+          return value;
         }
+      }
+    }
+  }
+}
       });
     }
   }
@@ -142,4 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cat = btn.dataset.id; updateChart();
     });
   });
+
+  
 });
+

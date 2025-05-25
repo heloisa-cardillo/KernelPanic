@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         metricaSelecionada = document.querySelector('[name="metrica"]').value;
 
+        console.log(dataSalva)
+
         if (metricaSelecionada == "valor_FOB") {
             valores = dataSalva.map((d) => d.total_valor_fob);
             chartLine.data.datasets[0].label = "Valor FOB";

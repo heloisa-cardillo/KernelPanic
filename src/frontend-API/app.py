@@ -12,10 +12,10 @@ app = Flask(__name__, static_folder='static')
 # Dados para conectar ao banco de dados
 def get_db_connection():
     conn = pymysql.connect(
-        host="localhost",
-        user="root",
-        password="Tomilho@0",
-        database="api",
+        host=os.environ.get("ENV_HOST"),
+        user=os.environ.get("ENV_USER"),
+        password=os.environ.get("ENV_PASSWORD"),
+        database=os.environ.get("ENV_DATABASE"),
         cursorclass=pymysql.cursors.DictCursor 
     )
     print("Conexão feita!")
@@ -149,7 +149,6 @@ def filtros_dados_funil():
         total_valor_fob = row.get("total_valor_fob", 0)
         total_kg_liquido = row.get("total_kg_liquido", 0)
         valor_agregado = round(float(total_valor_fob) / float(total_kg_liquido), 2) if total_kg_liquido else 0
-        #valor_agregado = row.get("total_valor_agregado",0)
         resposta.append({
             "tipo": filtros.get("tipo"),
             "ano": row.get("ano"),
@@ -160,7 +159,7 @@ def filtros_dados_funil():
             "total_valor_fob": total_valor_fob,
             "total_kg_liquido": total_kg_liquido,
             "total_registros": row.get("total_registros", 0),
-            "nome_produto": row.get("nome_produto", "").split(";")[0].split(",")[0][:50]
+            "nome_produto": f"{row.get('codigo_ncm', '')} - {row.get('nome_produto', '')}"
         })
     print(resultados)
     return jsonify(resultados=resposta)

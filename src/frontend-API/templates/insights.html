@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Insights</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/insights.css') }}" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <header class="header">
-        <a href="#"><img src="{{ url_for('static', filename='img/KernelPanic.png') }}" alt="logo" class="logo" /></a>
-        <section class="links">
-            <a href="/">Home</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="#lineChartDiv" class="buttonHighlight">Balança Comercial</a>
-            <a href="#top5" class="buttonHighlight">Top 5 Produtos</a>
-            <a href="#top5" class="buttonHighlight">Insights</a>
-        </section>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Insights</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/normalize.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/header.css') }}"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/insights.css') }}"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <a href="#"
+                ><img
+                    src="{{ url_for('static', filename='img/KernelPanic.png') }}"
+                    alt="logo"
+                    class="logo"
+            /></a>
+            <section class="links">
+                <a href="/">Home</a>
+                <a href="sobre.html">Sobre</a>
+                <a href="#lineChartDiv" class="buttonHighlight"
+                    >Balança Comercial</a
+                >
+                <a href="#top5" class="buttonHighlight">Top 5 Produtos</a>
+                <a href="#top5" class="buttonHighlight">Insights</a>
+            </section>
+        </header>
 
-    <main class="mainPage">
-        <h1>Insights</h1>
+        <main class="mainPage">
+            <h1>Insights</h1>
 
-        <div class="analises">
-            <label for="tipo">Tipo de Análise:</label>
             <select id="tipo">
                 <option value="importacao">Importação</option>
                 <option value="exportacao" selected>Exportação</option>
             </select>
-        </div>
 
-        <div class="options">
-            <button class="buttonOption" data-id="A">Países mais importantes</button>
-            <button class="buttonOption" data-id="B">Municípios mais importantes</button>
-            <button class="buttonOption" data-id="C">Crescimento</button>
-            <button class="buttonOption" data-id="D">Decaimento</button>
-        </div>
+            <div class="options">
+                <button class="buttonOption" data-id="A">
+                    Paises mais importantes para a economia brasileira
+                </button>
+                <button class="buttonOption" data-id="B">
+                    Municípios mais importantes para a economia brasileira
+                </button>
+                <button class="buttonOption" data-id="C">Paises com maior crescimento na economia brasileira</button>
+                <button class="buttonOption" data-id="D">Paises em maior decaimento na economia brasileira</button>
+            </div>
 
-        <div class="chartDiv">
-            <canvas id="chart" width="800" height="400"></canvas>
-        </div>
-    </main>
-
-    <script src="{{ url_for('static', filename='js/insightChart.js') }}"></script>
-</body>
+            <div class="chartDiv">
+                <canvas id="chart"></canvas>
+                
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+        <script src="{{ url_for('static', filename='js/insightChart.js') }}"></script>
+    </body>
 </html>

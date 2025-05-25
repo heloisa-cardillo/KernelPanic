@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");  
-
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -12,18 +11,65 @@ body {
   height: 100%;
   line-height: normal;
   color: white;
-  font-family: "Space Grotesk";
+  font-family: "Space Grotesk", sans-serif;
   margin: 4rem 8rem;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
-.lineChartDiv, .funnelChartDiv{
-    background-color: white;
-    border-radius: 10px;
-    height: 500px;
-    margin-top: 2rem;
-    width: 100%;
+.main {
+  margin-top: 4rem;
+  width: 100%;
 }
 
+.chartSection {
+  margin-top: 5rem;
+  width: 100%;
+}
+
+.lineChartDiv, .funnelChartDiv {
+  background-color: white;
+  border-radius: 10px;
+  height: 500px;
+  margin-top: 2rem;
+  width: 100%;
+  overflow: auto;
+}
+
+.filtersDiv {
+  margin-top: 5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  row-gap: 0.3rem;
+  width: 100%;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 250px; /* Flexível com largura mínima */
+  min-width: 200px;
+}
+
+.filter select,
+.filter input {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #043873;
+  outline: none;
+  height: 45px;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.filter select:hover {
+  border-color: #043873;
+}
 
 .buttonApply {
   padding: 12px 24px;
@@ -43,72 +89,6 @@ body {
   background-color: #1866c2;
 }
 
-
-
-.filter{
-    display: flex;
-    flex-direction: column;
-}
-
-.filter select {
-    margin-top: 0.5rem;
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  color: #043873;
-  outline: none;
-  cursor: pointer;
-  transition: border 0.3s ease;
-}
-
-.filter input{
-    padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  color: #043873;
-  margin-top: 0.5rem;
-}
-
-.filter select:hover {
-  border-color: #043873;
-}
-
-
-.filtersDiv{
-    margin-top: 5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  row-gap: 0.3rem;
-}
-
-.chartSection{
-    margin-top: 5rem;
-}
-
-.main{
-    margin-top: 4rem;
-}
-
-
-.filter select,
-.filter input {
-  padding: 10px 15px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  color: #043873;
-  outline: none;
-  height: 45px; 
-  box-sizing: border-box;
-}
-
-
 @media (max-width: 1024px) {
   body {
     margin: 2rem 4rem;
@@ -125,7 +105,25 @@ body {
   }
 }
 
+@media (max-width: 768px) {
+  body {
+    margin: 1.5rem 2rem;
+  }
 
+  .filter {
+    flex: 1 1 100%;
+  }
+
+  .chartSection h1 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .lineChartDiv,
+  .funnelChartDiv {
+    height: 400px;
+  }
+}
 
 @media (max-width: 480px) {
   body {
@@ -135,4 +133,40 @@ body {
   .chartSection h1 {
     font-size: 1.2rem;
   }
+
+  .lineChartDiv,
+  .funnelChartDiv {
+    height: 300px;
+  }
+
+  .buttonApply {
+    width: 100%;
+  }
+}
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #043873;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
