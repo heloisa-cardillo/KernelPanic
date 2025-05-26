@@ -36,6 +36,18 @@ body {
   overflow: auto;
 }
 
+.funnelChartDiv {
+  background-color: white;
+  border-radius: 10px;
+  min-height: 500px;
+  margin-top: 2rem;
+  width: 100%;
+  overflow: auto;
+  height: auto;
+}
+
+
+
 .filtersDiv {
   margin-top: 5rem;
   display: flex;
@@ -48,7 +60,7 @@ body {
 .filter {
   display: flex;
   flex-direction: column;
-  flex: 1 1 250px; /* Flexível com largura mínima */
+  flex: 1 1 250px; 
   min-width: 200px;
 }
 
@@ -134,10 +146,7 @@ body {
     font-size: 1.2rem;
   }
 
-  .lineChartDiv,
-  .funnelChartDiv {
-    height: 300px;
-  }
+  .lineChartDiv
 
   .buttonApply {
     width: 100%;
