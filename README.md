@@ -4,21 +4,37 @@
 
 > _A API se trata de um projeto submetido à metodologia de ensino em implantação na Fatec São José dos Campos, do qual os alunos formam equipes baseadas na metodologia ágil SCRUM, tendo um aluno como Scrum Master, um sendo o Product Owner e o restante dos integrantes como Dev Team._
 
-###  ⏳ Status do projeto: 2/3 Sprint ✅
+###  ⏳ Status do projeto: 3/3 Sprint ✅
 
 ## Visão Geral
-  Este projeto tem como objetivo desenvolver uma API para análise de dados das exportações e importações do estado de São Paulo. A solução permitirá a extração e visualização de informações estratégicas sobre os produtos exportados, destinos e tendências históricas.
+  Este projeto teve como objetivo desenvolver uma API para análise de dados das exportações e importações do estado de São Paulo. A solução permitirá a extração e visualização de informações estratégicas sobre os produtos exportados e importados.
   
 ## Objetivo do produto
-  O sistema será uma ferramenta interativa para auxiliar empresas e órgãos governamentais a entender melhor o panorama das exportações paulistas. Entre os principais recursos, destacam-se:
+  O sistema será uma ferramenta interativa para auxiliar empresas e órgãos governamentais a entender melhor o panorama das exportações e importações paulistas. Entre os principais recursos, destacam-se:
 
   - Segmentação de dados por município.
 
-  - Filtros para busca por código de exportação.
+  - Filtros para busca por código de exportação e importação.
 
   - Visualização da evolução histórica da balança comercial.
 
   - Normalização e análise de dados entre os anos de 2013 e 2023.
+
+  - Interface web responsiva com gráficos interativos (linha e funil).
+
+
+  ## 📊 Funcionalidades e Insights
+
+  - Página de insights visuais com gráfico de funil.
+
+  - Filtros por NCM, país destino, cidade de origem, valor agregado e ano.
+
+  - Queries otimizadas para retornar os top 5 produtos com maior valor agregado.
+
+  - Imagem Docker criada e implantada na AWS EC2.
+
+  - Integração com MySQL populado por script Python.
+
 
 <span id="backlog">
 
@@ -62,6 +78,8 @@
 
 ## MVP's
 
+🎥 Acesse diretamente:  
+[▶️ Ver vídeo no Google Drive](https://drive.google.com/file/d/1HmgITsIw0_riThABAE-qnakHjtnIiriM/view?usp=drive_link)
 
 
 # Google Colab: 
@@ -173,6 +191,26 @@ Para o funcionamento do nosso sistema, você precisara das seguintes tecnologias
   ```
 </details>
 <br>
+
+## 🐳 Executando com Docker
+
+<details>
+  <summary><b>Clique Aqui</b></summary>
+
+  1. No terminal, navegue até a raiz do projeto e execute o seguinte comando para criar a imagem Docker:
+
+   ```bash
+  docker build -t smart-farming-api .
+```
+  2. Em seguida, execute o container usando:
+  ```
+  docker run -p 5000:5000 --env-file .env smart-farming-api
+  ```
+  3. Acesse o sistema no navegador pelo endereço:
+  ```
+  http://localhost:5000
+  ```
+</details>
 
 ## Equipe <a name="equipe"><a>
 |  Foto        |     Função    |           Nome            |                            LinkedIn                            |                      GitHub                       |
