@@ -49,14 +49,19 @@
                                 return value < 0.05 ? "end" : "center";
                             },
                             font: {
-                                size: 16,
+                                size: 14,
+                                weight: "bold",
                             },
                             formatter: (value, context) => {
                                 const realValue = exportData[context.dataIndex];
                                 return `${realValue.toLocaleString()} USD`;
                             },
                             color: "#fff",
+                            backgroundColor: "#043873",
+                            borderRadius: 6,
+                            padding: 6,
                             textAlign: "center",
+                            display: "auto",
                         },
                     },
                 ],
@@ -78,36 +83,38 @@
                         display: false,
                     },
                     tooltip: {
-    enabled: true,
-    callbacks: {
-        title: () => '',  // remove o título
-        label: function (context) {
-            const value = exportData[context.dataIndex] || 0;
-            return value.toLocaleString() + " USD";
-        },
-    },
-},
+                        enabled: true,
+                        callbacks: {
+                            title: () => "",
+                            label: function (context) {
+                                const value =
+                                    exportData[context.dataIndex] || 0;
+                                return value.toLocaleString() + " USD";
+                            },
+                        },
+                    },
                 },
                 scales: {
-                    x: {
-                        display: false,
-                    },
                     y: {
                         display: true,
                         ticks: {
+                            color: "#000000", 
                             callback: function (value) {
                                 const label = this.getLabelForValue(value);
-                                const maxLength = 50; 
-                                if (label.length > maxLength) {
-                                    const regex = new RegExp(
-                                        `(.{1,${maxLength}})(\\s|$)`,
-                                        "g"
-                                    );
-                                    return label
-                                        .match(regex)
-                                        .map((l) => l.trim());
-                                }
-                                return label;
+                                const maxLineLength = 20; 
+                                const maxTotalLength = 60; 
+
+                                let trimmedLabel =
+                                    label.length > maxTotalLength
+                                        ? label.slice(0, maxTotalLength - 3) +
+                                          "..."
+                                        : label;
+
+                                const regex = new RegExp(
+                                    `.{1,${maxLineLength}}`,
+                                    "g"
+                                );
+                                return trimmedLabel.match(regex);
                             },
                         },
                     },
@@ -168,7 +175,8 @@
                         console.error("Erro ao enviar os dados:", error);
                     })
                     .finally(() => {
-                        document.getElementById("loading").style.display = "none";
+                        document.getElementById("loading").style.display =
+                            "none";
                         clearTimeout(timeoutId);
                     });
             });
