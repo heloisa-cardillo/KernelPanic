@@ -57,6 +57,52 @@
 | 13 | 🟡 Baixa | Eu como usuário, no gráfico dos top 5 cargas, quero filtro por ano da exportação. | 3 | 3 | Filtro pelo ano de exportação |
 
 
+Beleza 👌
+Separei em **3 tabelas**, uma para cada **Sprint**, reiniciando o Rank em cada uma delas.
+Também organizei dentro de cada Sprint em **ordem decrescente de prioridade** (🔴 > 🟠 > 🟡).
+
+---
+
+## 🟢 Sprint 1 - Comercial
+
+| Rank | Prioridade |                                                                                           User Story                                                                                          | Estimativa | Sprint | Requisitos do Parceiro                                                                 |
+| :--: | :--------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :------------------------------------------------------------------------------------- |
+|   1  |   🔴 Alta  |   Eu como cliente, quero realizar o cadastro completo de clientes e departamento responsável  |      ?     |    1   | Sistema de cadastro de clientes com campos completos                                   |
+|   2  |   🔴 Alta  | Eu como cliente, quero acessar o histórico completo das interações com clientes e relatório detalhado da interação |      ?     |    1   | Registro e consulta de histórico detalhado de interações com clientes                  |
+|   3  |  🟠 Média  |                  Eu como cliente, quero visualizar um funil de vendas com classificação de clientes em: Prospects, Inicial, Potencial, Manutenção, Em Negociação e Follow Up                  |      ?     |    1   | Funil de vendas com etapas definidas e classificações de clientes <!-- Aqui que acho que ficaria bom colocar tambem um quadro parecido com o do jura, para mosrtrar onde cada cliente esta -->                     |
+|   4  |  🟠 Média  |                                               Eu como cliente, quero agendar tarefas e configurar lembretes para próximos contatos com clientes                                               |      ?     |    1   | Sistema de agendamento e lembretes integrado ao cadastro e histórico de clientes       |
+|   5  |  🟡 Baixa  |    Eu como cliente, quero gerar relatórios e gráficos quantitativos de interações, vendas efetuadas, clientes cadastrados, clientes por cidade e segmento, com filtros por dia, mês ou ano    |      ?     |    1   | Relatórios e dashboards com filtros e agrupamentos customizáveis                       |
+|   6  |  🟡 Baixa  |     Eu como cliente, quero medir o rendimento e a taxa de conversão das visitas em vendas do setor comercial    |      ?     |    1   | Relatórios de desempenho do setor comercial com indicadores de conversão e faturamento |
+
+---
+
+## 🟠 Sprint 2 - Operacional
+
+| Rank | Prioridade |                                                                                                                  User Story                                                                                                                  | Estimativa | Sprint | Requisitos do Parceiro                                                      |
+| :--: | :--------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :-------------------------------------------------------------------------- |
+|   1  |   🔴 Alta  |                             Eu como cliente, quero unificar todos os checklists e cadastros atualmente utilizados em ferramentas distintas (Microsoft Lists, Google Forms e Microsoft Forms) em uma única solução                            |      ?     |    2   | Centralização e unificação de checklists e cadastros                        |
+|   2  |   🔴 Alta  |                                                     Eu como cliente, quero uma plataforma centralizada para visualização, padronização e simplificação do acesso para todos os envolvidos                                                    |      ?     |    2   | Plataforma única de acesso, visualização e padronização                     |
+|   3  |  🟠 Média  |                                                                 Eu como cliente, quero cadastrar agregados com devolutiva automática após a conclusão do processo de cadastro                                                                |      ?     |    2   | Cadastro de agregados com feedback automático                               |
+|   4  |  🟠 Média  | Eu como cliente, quero gerenciar checklists padronizados, incluindo: abertura/fechamento da empresa (sim/não); agregado (dados do motorista, veículo e fotos); veículo da frota (sim/não); manutenção predial (excelente/bom/precisa reparo) |      ?     |    2   | Checklists padronizados para empresa, agregados, frota e manutenção predial |
+|   5  |  🟡 Baixa  |                                                                    Eu como cliente, quero que as informações dos fretes concluídos sejam automaticamente repassadas ao RH                                                                    |      ?     |    2   | Integração de dados de fretes concluídos com o setor de RH                  |
+
+---
+
+## 🟡 Sprint 3 - Administrativo
+
+| Rank | Prioridade |                                                                                          User Story                                                                                         | Estimativa | Sprint | Requisitos do Parceiro                                                              |
+| :--: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :---------------------------------------------------------------------------------- |
+|   1  |   🔴 Alta  | Eu como cliente, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro |      ?     |    3   | Sistema de eventos com notificações, formulários e geração automática de relatórios |
+|   2  |   🔴 Alta  | Eu como cliente, quero acompanhar a localização de cada funcionário (casa, escritório, evento, treinamento ou deslocamento) com histórico salvo e atualização somente quando houver mudança |      ?     |    3   | Registro de localização de funcionários com histórico atualizado                    |
+|   3  |  🟠 Média  |                 Eu como cliente, quero visualizar a quantidade de funcionários e agregados, junto ao perfil (homem, mulher, prefiro não identificar) e veículos cadastrados                 |      ?     |    3   | Cadastro de funcionários, agregados e veículos com perfis atualizados               |
+|   4  |  🟡 Baixa  |                                                Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente                                                |      ?     |    3   | Integração de dados comerciais e operacionais                                       |
+
+---
+
+Quer que eu faça uma **tabela única no final como índice geral**, apenas listando os nomes dos User Stories por Sprint e Rank (tipo sumário)?
+
+
+
 ## Tecnlogias utilizadas
 <div align="center">
 <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white&color=043873">
