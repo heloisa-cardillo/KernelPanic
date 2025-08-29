@@ -93,14 +93,11 @@ Também organizei dentro de cada Sprint em **ordem decrescente de prioridade** (
 | Rank | Prioridade |                                                                                          User Story                                                                                         | Estimativa | Sprint | Requisitos do Parceiro                                                              |
 | :--: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :----: | :---------------------------------------------------------------------------------- |
 |   1  |   🔴 Alta  | Eu como cliente, quero notificações automáticas de eventos com link, confirmação ou recusa justificada, conclusão após participação, formulário de avaliação e documento padrão de registro |      ?     |    3   | Sistema de eventos com notificações, formulários e geração automática de relatórios |
-|   2  |   🔴 Alta  | Eu como cliente, quero acompanhar a localização de cada funcionário (casa, escritório, evento, treinamento ou deslocamento) com histórico salvo e atualização somente quando houver mudança |      ?     |    3   | Registro de localização de funcionários com histórico atualizado                    |
-|   3  |  🟠 Média  |                 Eu como cliente, quero visualizar a quantidade de funcionários e agregados, junto ao perfil (homem, mulher, prefiro não identificar) e veículos cadastrados                 |      ?     |    3   | Cadastro de funcionários, agregados e veículos com perfis atualizados               |
-|   4  |  🟡 Baixa  |                                                Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente                                                |      ?     |    3   | Integração de dados comerciais e operacionais                                       |
+|   2  |   🔴 Alta  | Eu como cliente, quero acompanhar a localização de cada funcionário|      ?     |    3   | Registro de localização de funcionários com histórico atualizado                    |
+|   3  |  🟠 Média  |                 Eu como cliente, quero visualizar a quantidade de funcionários e agregados, além dos veículos cadastrados                 |      ?     |    3   | Cadastro de funcionários, agregados e veículos com perfis atualizados               |
+|   4  |  🟡 Baixa  |                                                Eu como cliente, quero acessar informações da parte comercial e operacional em um só ambiente                                                |      ?     |    3   | Integração de dados comerciais e operacionais na mesma plataforma                                     |
 
 ---
-
-Quer que eu faça uma **tabela única no final como índice geral**, apenas listando os nomes dos User Stories por Sprint e Rank (tipo sumário)?
-
 
 
 ## Tecnlogias utilizadas
