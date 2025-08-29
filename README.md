@@ -136,14 +136,6 @@
 
 ## 📋 Backlog / User Stories
 
-Perfeito! Vamos organizar **todos os itens das três sprints** em uma única tabela:
-
-* **Rank será definido pela prioridade** (🔴 Alta → 🟠 Média → 🟡 Baixa).
-* **Sprint será mantido**.
-* **Dentro da mesma prioridade, manter a ordem original de cada sprint**.
-
-Aqui está a tabela consolidada e ranqueada por prioridade:
-
 | Rank | Prioridade | Sprint |                                                                                          User Story                                                                                         | Estimativa |                                                                                    Requisitos do Parceiro                                                                                   |
 | :--: | :--------: | :----: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 |   1  |   🔴 Alta  |    1   |                                                  Eu como cliente, quero realizar o cadastro completo de clientes e departamento responsável                                                 |      ?     |                                                                     Sistema de cadastro de clientes com campos completos                                                                    |
