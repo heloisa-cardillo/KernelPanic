@@ -57,11 +57,80 @@
 | 13 | 🟡 Baixa | Eu como usuário, no gráfico dos top 5 cargas, quero filtro por ano da exportação. | 3 | 3 | Filtro pelo ano de exportação |
 
 
-Beleza 👌
-Separei em **3 tabelas**, uma para cada **Sprint**, reiniciando o Rank em cada uma delas.
-Também organizei dentro de cada Sprint em **ordem decrescente de prioridade** (🔴 > 🟠 > 🟡).
+# FATEC Profº Jessen Vidal - São José dos Campos - 2º Semestre DSM - 2025
+
+<p>Projeto desenvolvido para a API (Aprendizagem por Projeto Integrado) do 2° Semestre do curso Desenvolvimento de Software Multiplataforma (DSM) em parceria com a empresa <b>Newe Log</b>, no projeto de <i>Plataforma Integrada de Gestão</i>.</p>
+
+> _A API se trata de um projeto submetido à metodologia de ensino em implantação na Fatec São José dos Campos, do qual os alunos formam equipes baseadas na metodologia ágil SCRUM, tendo um aluno como Scrum Master, um sendo o Product Owner e o restante dos integrantes como Dev Team._
+
+### ⏳ Status do projeto: 0/3 Sprint 🚧
 
 ---
+
+## Visão Geral
+  Este projeto tem como objetivo desenvolver uma plataforma única que centralize e padronize processos administrativos, comerciais e operacionais da Newe Log.  
+  A solução permitirá a visualização de informações, notificações e relatórios de forma integrada, garantindo maior eficiência, controle e redução de erros nos processos internos.  
+
+---
+
+## Objetivo do produto
+  O sistema será uma ferramenta interativa para auxiliar na gestão da empresa de forma unificada.  
+  Entre os principais recursos, destacam-se:
+
+  - Centralização de dados e processos em uma única plataforma.  
+  - Automação e controle de eventos administrativos e treinamentos.  
+  - Gestão de clientes e vendas (CRM) com histórico de interações e funil comercial.  
+  - Unificação de checklists operacionais atualmente dispersos em diferentes ferramentas.  
+  - Relatórios estratégicos e em tempo real para apoio na tomada de decisão.  
+
+---
+
+## 📊 Funcionalidades e Insights
+
+### 🔹 Módulo Administrativo
+  - Cadastro de colaboradores.  
+  - Notificações automáticas de eventos (via e-mail, WhatsApp, etc).  
+  - Confirmação ou recusa de participação, com justificativa.  
+  - Registro de conclusão de treinamentos.  
+  - Documento padrão gerado automaticamente após o evento.  
+  - Consulta de eventos pendentes ou já realizados.  
+
+### 🔹 Módulo Comercial (CRM)
+  - Cadastro completo de clientes (nome, endereço, segmento, contatos, departamento).  
+  - Histórico detalhado de interações (data, meio de contato e relatório).  
+  - Funil de vendas com etapas: **Prospects, Inicial, Potencial, Manutenção, Em Negociação, Follow Up**.  
+  - Agendamento de tarefas e lembretes.  
+  - Relatórios e gráficos sobre vendas, clientes e interações.  
+
+### 🔹 Módulo Operacional
+  - Unificação de checklists usados atualmente (Google Forms, MS Forms, MS Lists).  
+  - Checklists operacionais:  
+    - Abertura e fechamento da empresa.  
+    - Cadastro e verificação de agregados (motorista, veículo, fotos).  
+    - Checklist de veículos da frota.  
+    - Manutenção predial (excelente/bom/precisa reparo).  
+  - Cadastro de agregados com devolutiva automática.  
+  - Plataforma única e centralizada para todos os envolvidos.  
+
+---
+
+## ✅ Benefícios esperados
+  - Redução de retrabalho e riscos de erro.  
+  - Melhor controle e acompanhamento de treinamentos, vendas e operações.  
+  - Padronização e centralização dos processos.  
+  - Relatórios precisos e em tempo real.  
+
+---
+
+## ⚙️ Requisitos Não Funcionais
+  - Manual de Instalação (GitHub).  
+  - Manual do Usuário.  
+  - Documentação da API (rotas e exemplos).  
+  - Modelagem de Banco de Dados Relacional.  
+
+---
+
+## 🖥️ Tecnologias Utilizadas
 
 ## 🟢 Sprint 1 - Comercial
 
